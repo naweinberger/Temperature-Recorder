@@ -1,7 +1,7 @@
 # Temperature-Recorder
 A system that reads and plots temperature readings from an Arduino with a temperature sensor
 
-### temperature_controller
+### temperature_controller.ino
 An Arduino program that reports temperature data measured by an LM34 temperature sensor. Additionally, the onboard LED is configured to light up at a given temperature threshold (currently set to 30 C).
 
 ### read.py
