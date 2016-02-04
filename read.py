@@ -18,16 +18,27 @@ while True:
             formatted_timestamp = datetime.datetime.fromtimestamp(timestamp).strftime('%Y%m%d%H%M%S')
 
             # log the new entry
-            print data + ',' + formatted_timestamp + '\n'
+            entry = data + ',' + formatted_timestamp + '\n'
 
-            # write the new entry to file
-            f.write(data + ',' + formatted_timestamp + '\n')
-            
+            # sometimes two readings come in at once - throw these out
+            # we expect:
+            # ##.## degrees (5 chars)
+            # a comma (1 char)
+            # yyyymmddHHMMSS (14 chars)
+            # a total of 20 chars, and we can allow some room for variance in decimal places
+            if (len(entry) in range(18, 22)):
+                print entry
 
-            # commit the file for continuous updates without exiting program
-            f.flush()
-            os.fsync(f)
+                # write the new entry to file
+                
+                f.write(entry)
+                
 
+                # commit the file for continuous updates without exiting program
+                f.flush()
+                os.fsync(f)
+            else:
+                   print "Skipped entry: " + entry
         time.sleep(1)
         
     except serial.SerialTimeoutException:
