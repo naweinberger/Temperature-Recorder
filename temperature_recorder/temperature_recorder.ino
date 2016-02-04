@@ -14,7 +14,7 @@ void loop() {
   
   float celsius = (fahrenheit - 32) * (5.0/9.0);
   
-  Serial.print(celsius);
+  Serial.println(celsius);
 
   if (celsius >= 30.0) {
     setLed(true);
